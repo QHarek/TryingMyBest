@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9eea4c7bd88f484f89f671cc01b999f, type: 3}
+  m_Name: GoldOreCluster
+  m_EditorClassIdentifier: 
+  _oreAmountMin: 20
+  _oreAmountMax: 40
+  _durability: 10
+  _oreMaterial: {fileID: 2100000, guid: 13c88cf3badbe3540aa9b4a4cfcf6528, type: 2}
+  _oreType: 2
