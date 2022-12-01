@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     private void Hit()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit, 10);
-        if(hit.collider.GetComponent<OreClusterBehavior>() != null)
-            hit.collider.GetComponent<OreClusterBehavior>().ApplyDamage(gameObject);
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 10))
+            if(hit.collider.GetComponent<OreClusterBehavior>() != null)
+                hit.collider.GetComponent<OreClusterBehavior>().ApplyDamage(gameObject);
     }
 }
