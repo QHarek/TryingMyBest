@@ -10,6 +10,7 @@
 ## Tools
 ## Shops
 ## Crafting
+## Stats UI
 ## Enemies
 ## Forest generation
 ## Plants generation
