@@ -5,6 +5,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _speed;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void Update()
     {
         Move();

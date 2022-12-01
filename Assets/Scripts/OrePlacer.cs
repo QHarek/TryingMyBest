@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -7,10 +6,13 @@ public class OrePlacer : MonoBehaviour
     [SerializeField] private GameObject _oreClusterPrefab;
     [SerializeField] private Terrain _terrain;
     [SerializeField] private int _startClusterCount;
-    [SerializeField] private float clusterUnderstanding;
-    [SerializeField] private OreClusterData[] possibleClusters;
+    [SerializeField] private float _clusterTverching;
+    [SerializeField] private int _copperOreSpawnChance;
+    [SerializeField] private int _ironOreSpawnChance;
+    [SerializeField] private int _goldOreSpawnChance;
+    [SerializeField] private OreClusterData[] _possibleClusters;
 
-    void Start()
+    private void Start()
     {
         GenerateStartClusters();
     }
@@ -30,7 +32,7 @@ public class OrePlacer : MonoBehaviour
     public void GenerateNewCluster(OreClusterData.oreTypes oreType)
     {
         Vector3 clusterPosition = GenerateRandomClusterPosition();
-        OreClusterData clusterType = possibleClusters.Where(p => p.OreType == oreType).First();
+        OreClusterData clusterType = _possibleClusters.Where(p => p.OreType == oreType).First();
         while (IsPlaceOccupied(clusterPosition))
             clusterPosition = GenerateRandomClusterPosition();
         Debug.Log(clusterPosition);
@@ -40,38 +42,55 @@ public class OrePlacer : MonoBehaviour
 
     private OreClusterData RandomClusterType()
     {
-        Type type = typeof(OreClusterData.oreTypes);
-        Array values = type.GetEnumValues();
-        OreClusterData.oreTypes oreType = (OreClusterData.oreTypes)UnityEngine.Random.Range(0, values.Length);
-        OreClusterData randomClusterData = possibleClusters.Where(p => p.OreType == oreType).First();
+        int chacesSumm = _copperOreSpawnChance + _ironOreSpawnChance + _goldOreSpawnChance;
+        int oreRoll = Random.Range(0, chacesSumm);
+        OreClusterData.oreTypes oreType;
+
+        if (oreRoll > _copperOreSpawnChance)
+            if (oreRoll > _copperOreSpawnChance + _ironOreSpawnChance)
+                oreType = OreClusterData.oreTypes.goldOre;
+            else
+                oreType = OreClusterData.oreTypes.ironOre;
+        else
+            oreType = OreClusterData.oreTypes.copperOre;
+
+        OreClusterData randomClusterData = _possibleClusters.Where(p => p.OreType == oreType).First();
         return randomClusterData;
     }
 
     private Vector3 GenerateRandomClusterPosition()
     {
         Vector3 clusterPosition = new Vector3(
-            UnityEngine.Random.Range(0, _terrain.terrainData.size.x),
+            Random.Range(0, _terrain.terrainData.size.x),
             0,
-            UnityEngine.Random.Range(0, _terrain.terrainData.size.z));
+            Random.Range(0, _terrain.terrainData.size.z));
         clusterPosition = GetClusterTerrainPosition(clusterPosition.x, clusterPosition.z);
         return clusterPosition;
     }
 
     private bool IsPlaceOccupied(Vector3 possiblePosition)
     {
-        return false;
+        if (Physics.OverlapSphere(possiblePosition, 10, LayerMask.GetMask("Ore Clusters")).Length == 0)
+            return false;
+        else
+            return true;
     }
 
     private Vector3 GetClusterTerrainPosition(float x, float z)
     {
-        float y = _terrain.SampleHeight(new Vector3(x, 0 ,z)) + clusterUnderstanding;
+        float y = _terrain.SampleHeight(new Vector3(x, 0 ,z));
         Vector3 clusterPosition = new Vector3(x, y, z);
         return clusterPosition;
     }
 
     private void PlaceCluster(Vector3 clusterPosition, OreClusterData clusterType)
     {
-        var oreCluster = Instantiate(_oreClusterPrefab, clusterPosition, Quaternion.identity, _terrain.transform);
+        float normalizedX = clusterPosition.x / _terrain.terrainData.size.x;
+        float normalizedZ = clusterPosition.z / _terrain.terrainData.size.z;
+        Vector3 terrainNormal = _terrain.terrainData.GetInterpolatedNormal(normalizedX, normalizedZ);
+        Quaternion initRotation = Quaternion.LookRotation(terrainNormal) * Quaternion.Euler(90, 0, 0);
+        var oreCluster = Instantiate(_oreClusterPrefab, clusterPosition, initRotation, _terrain.transform);
+        oreCluster.transform.localPosition += new Vector3(0, _clusterTverching, 0);
         oreCluster.GetComponent<OreClusterBehavior>().oreClusterData = clusterType;
         oreCluster.name = clusterType.name;
     }

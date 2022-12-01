@@ -370,13 +370,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1911a6f58d971946aacc527397dfa31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _oreCluster: {fileID: 2852063207959430107, guid: eebf972ec7f5c5b42944e02f95f500e3, type: 3}
+  _oreClusterPrefab: {fileID: 2852063207959430107, guid: eebf972ec7f5c5b42944e02f95f500e3, type: 3}
   _terrain: {fileID: 953694367}
-  clusterUnderstanding: 0.7
-  possibleClusters:
+  _startClusterCount: 200
+  _clusterTverching: 0.7
+  _copperOreSpawnChance: 60
+  _ironOreSpawnChance: 30
+  _goldOreSpawnChance: 10
+  _possibleClusters:
   - {fileID: 11400000, guid: 8673cdbd04029644d91c5adf416a1f53, type: 2}
-  - {fileID: 11400000, guid: b734d84a1ca012e428fa5f70f3db6719, type: 2}
   - {fileID: 11400000, guid: 44c07c0628fcda34088db509276c6f92, type: 2}
+  - {fileID: 11400000, guid: b734d84a1ca012e428fa5f70f3db6719, type: 2}
 --- !u!1001 &6264051608474519199
 PrefabInstance:
   m_ObjectHideFlags: 0

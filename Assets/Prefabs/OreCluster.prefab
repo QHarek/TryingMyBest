@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2273551319720122199}
   - component: {fileID: 6435018505710115555}
   - component: {fileID: 7936887569973656781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1354,7 +1354,7 @@ GameObject:
   - component: {fileID: 5767361868693804352}
   - component: {fileID: 2355685699130139013}
   - component: {fileID: 955251027598980546}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2695,7 +2695,7 @@ GameObject:
   - component: {fileID: 6204048316779109077}
   - component: {fileID: 5108967719202260914}
   - component: {fileID: -7222542513615440903}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OreCluster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4038,6 +4038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023a3f7979538448b01e8cff500ec72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oreClusterData: {fileID: 0}
 --- !u!1 &6481188536869174145
 GameObject:
   m_ObjectHideFlags: 0
@@ -4052,7 +4053,7 @@ GameObject:
   - component: {fileID: 6693356471320800877}
   - component: {fileID: 3960824942037908765}
   - component: {fileID: 7471198808996072741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5392,7 +5393,7 @@ GameObject:
   - component: {fileID: 3210706707844950990}
   - component: {fileID: 8108973113013515739}
   - component: {fileID: 2256064807465578305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6732,7 +6733,7 @@ GameObject:
   - component: {fileID: 8687211948296755598}
   - component: {fileID: 7224217090376738017}
   - component: {fileID: 959555479756387090}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
