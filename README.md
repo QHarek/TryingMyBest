@@ -17,5 +17,6 @@
 ## Building
 ## Farming
 ## LAN multiplayer
+## Procedural world generation
 ## Quests
 ## Abilities system
