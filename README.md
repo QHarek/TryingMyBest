@@ -4,6 +4,9 @@
 ### Expandable variety of ores (Done)
 ### Generation of new ore clusters (Done)
 ## Player inventory
+### UI layout
+### Items interaction
+### Sorting
 ## Tools
 ## Shops
 ## Crafting
