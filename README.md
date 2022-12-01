@@ -18,3 +18,4 @@
 ## Farming
 ## LAN multiplayer
 ## Quests
+## Abilities system
