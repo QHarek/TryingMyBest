@@ -4038,6 +4038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023a3f7979538448b01e8cff500ec72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _oreUIItemPrefab: {fileID: 2526100848092760611, guid: 0de6a62a815564e44a3b188c9ac6a71f, type: 3}
   oreClusterData: {fileID: 0}
 --- !u!1 &6481188536869174145
 GameObject:

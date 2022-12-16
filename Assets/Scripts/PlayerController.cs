@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed;
+    private PlayerStats _playerStats;
 
     private void Start()
     {
+        _playerStats = FindObjectOfType<PlayerStats>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -35,7 +35,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(new Vector3(Input.GetAxis("Horizontal") * _speed, 0, Input.GetAxis("Vertical") * _speed));
+        transform.Translate(new Vector3(
+            Input.GetAxis("Horizontal") * _playerStats.MoveSpeed * _playerStats.MoveSpeedModifier * Time.deltaTime,
+            0
+            , Input.GetAxis("Vertical") * _playerStats.MoveSpeed * _playerStats.MoveSpeedModifier * Time.deltaTime));
     }
 
     private void Hit()
@@ -43,6 +46,6 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, 10))
             if(hit.collider.GetComponent<OreClusterBehavior>() != null)
-                hit.collider.GetComponent<OreClusterBehavior>().ApplyDamage(gameObject);
+                hit.collider.GetComponent<OreClusterBehavior>().ApplyDamage(gameObject, _playerStats.PickAxeDamage);
     }
 }

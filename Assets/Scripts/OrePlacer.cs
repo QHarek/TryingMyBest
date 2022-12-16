@@ -35,8 +35,6 @@ public class OrePlacer : MonoBehaviour
         OreClusterData clusterType = _possibleClusters.Where(p => p.OreType == oreType).First();
         while (IsPlaceOccupied(clusterPosition))
             clusterPosition = GenerateRandomClusterPosition();
-        Debug.Log(clusterPosition);
-        Debug.Log(oreType);
         PlaceCluster(clusterPosition, clusterType);
     }
 
