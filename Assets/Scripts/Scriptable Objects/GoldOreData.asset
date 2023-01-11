@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0272db37365f67c4b81f69c508ca9a11, type: 3}
   m_Name: GoldOreData
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: aeeee6dc57e57694797a001301572d36, type: 3}
   _cost: 0
   _weight: 0
-  _stackSize: 0
-  _description: 
+  _stackSize: 512
+  _name: Gold Ore
+  _description: 345

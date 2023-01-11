@@ -17,4 +17,4 @@ MonoBehaviour:
   _durability: 10
   _oreMaterial: {fileID: 2100000, guid: 13c88cf3badbe3540aa9b4a4cfcf6528, type: 2}
   _oreType: 2
-  _oreItemPrefab: {fileID: 2526100848092760611, guid: 0de6a62a815564e44a3b188c9ac6a71f, type: 3}
+  _oreData: {fileID: 11400000, guid: 38abffd729c4ede42ac1f7410e6cbd1b, type: 2}

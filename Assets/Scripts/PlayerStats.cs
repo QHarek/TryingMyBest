@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerStats : MonoBehaviour
+public sealed class PlayerStats : MonoBehaviour
 {
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _moveSpeed;

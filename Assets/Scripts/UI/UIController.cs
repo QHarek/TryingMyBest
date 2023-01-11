@@ -1,18 +1,24 @@
 using UnityEngine;
 
-public class UIController : MonoBehaviour
+public sealed class UIController : MonoBehaviour
 {
-    private GameObject _inventory;
+    private GameObject _inventoryCanvas;
+
+    private void Awake()
+    {
+        _inventoryCanvas = GameObject.Find("Inventory Canvas");
+    }
 
     private void Start()
     {
-        _inventory = GameObject.Find("Inventory");
-        _inventory.SetActive(false);
+        _inventoryCanvas.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown("i"))
-            _inventory.SetActive(!_inventory.activeSelf);
+        {
+            _inventoryCanvas.SetActive(!_inventoryCanvas.activeSelf);
+        }
     }
 }

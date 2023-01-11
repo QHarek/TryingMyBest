@@ -1,12 +1,12 @@
 using System.Linq;
 using UnityEngine;
 
-public class OrePlacer : MonoBehaviour
+public sealed class OrePlacer : MonoBehaviour
 {
     [SerializeField] private GameObject _oreClusterPrefab;
     [SerializeField] private Terrain _terrain;
     [SerializeField] private int _startClusterCount;
-    [SerializeField] private float _clusterTverching;
+    [SerializeField] private float _clusterDeeping;
     [SerializeField] private int _copperOreSpawnChance;
     [SerializeField] private int _ironOreSpawnChance;
     [SerializeField] private int _goldOreSpawnChance;
@@ -88,8 +88,8 @@ public class OrePlacer : MonoBehaviour
         Vector3 terrainNormal = _terrain.terrainData.GetInterpolatedNormal(normalizedX, normalizedZ);
         Quaternion initRotation = Quaternion.LookRotation(terrainNormal) * Quaternion.Euler(90, 0, 0);
         var oreCluster = Instantiate(_oreClusterPrefab, clusterPosition, initRotation, _terrain.transform);
-        oreCluster.transform.localPosition += new Vector3(0, _clusterTverching, 0);
-        oreCluster.GetComponent<OreClusterBehavior>().oreClusterData = clusterType;
+        oreCluster.transform.localPosition += new Vector3(0, -_clusterDeeping, 0);
+        oreCluster.GetComponent<OreClusterBehavior>().ClusterData = clusterType;
         oreCluster.name = clusterType.name;
     }
 }

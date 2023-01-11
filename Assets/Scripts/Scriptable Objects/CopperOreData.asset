@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0272db37365f67c4b81f69c508ca9a11, type: 3}
   m_Name: CopperOreData
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 548aa6393e4a110428cfee4881dde87d, type: 3}
   _cost: 0
   _weight: 0
-  _stackSize: 0
-  _description: 
+  _stackSize: 512
+  _name: Copper Ore
+  _description: 123

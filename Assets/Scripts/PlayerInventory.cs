@@ -1,72 +1,101 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class PlayerInventory : MonoBehaviour, IInventory
+public sealed class PlayerInventory : MonoBehaviour, IInventory
 {
 
     private UIPlayerInventoryController _playerInventoryUI;
-    private Dictionary<GameObject, int> _items;
+    private Dictionary<Item, int> _items;
 
-    private void Start()
+    private void Awake()
     {
-        _items = new Dictionary<GameObject, int>();
-        _playerInventoryUI = GetComponent<UIPlayerInventoryController>();
+        _items = new Dictionary<Item, int>();
+        _playerInventoryUI = FindObjectOfType<UIPlayerInventoryController>(true);
     }
 
-    public void AddItem(GameObject item, int count)
+    private bool IsItemContained(Item item)
     {
-        if (_items.ContainsKey(item))
+        foreach (var _item in _items)
         {
-            _items[item] += count;
-            int itemPosition = GetItemPosition(item);
-            _playerInventoryUI.UpdateItemsCount(itemPosition, _items[item]);
+            if (item.Name == _item.Key.Name)
+                return true;
+        }
+        return false;
+    }
+
+    private Item FindSimilarItem(Item item)
+    {
+        foreach (var _item in _items)
+        {
+            if (item.Name == _item.Key.Name)
+                return _item.Key;
+        }
+        return item;
+    }
+
+    public void AddItem(Item item, int count)
+    {
+        if (IsItemContained(item))
+        {
+            Item existingItem = FindSimilarItem(item);
+            _items[existingItem] += count;
+            int itemIndex = GetItemIndex(existingItem);
+            _playerInventoryUI.UpdateItemsCount(itemIndex, _items[existingItem]);
         }
         else
         {
             _items.Add(item, count);
-            _playerInventoryUI.AddItem(item.GetComponent<Item>().GetIcon(), count);
+            _playerInventoryUI.AddItem(item);
+            int itemIndex = GetItemIndex(item);
+            _playerInventoryUI.UpdateItemsCount(itemIndex, _items[item]);
         }
     }
 
-    public void DeleteItem(GameObject item, int count)
+    public void DeleteItem(Item item, int count)
     {
-        int itemPosition = GetItemPosition(item);
+        int itemIndex = GetItemIndex(item);
         if (_items[item] == count)
         {
             _items.Remove(item);
-            _playerInventoryUI.RemoveItem(itemPosition);
+            _playerInventoryUI.RemoveItem(itemIndex);
         }
         else
         {
             _items[item] -= count;
-            _playerInventoryUI.UpdateItemsCount(itemPosition, _items[item]);
+            _playerInventoryUI.UpdateItemsCount(itemIndex, _items[item]);
         }
     }
 
-    public void DropItem(GameObject item, int count)
+    public void DropItem(Item item, int count)
     {
-        int itemPosition = GetItemPosition(item);
+        int itemIndex = GetItemIndex(item);
         if (_items[item] == count)
         {
             _items.Remove(item);
-            _playerInventoryUI.RemoveItem(itemPosition);
+            _playerInventoryUI.RemoveItem(itemIndex);
         }
         else
         {
             _items[item] -= count;
-            _playerInventoryUI.UpdateItemsCount(itemPosition, _items[item]);
+            _playerInventoryUI.UpdateItemsCount(itemIndex, _items[item]);
         }
     }
 
-    public int GetItemPosition(GameObject item)
+    public int GetItemIndex(Item item)
     {
-        int position = 0;
+        int index = 0;
         foreach (var key in _items)
         {
             if (key.Key == item)
                 break;
-            position++;
+            index++;
         }
-        return position;
+        return index;
+    }
+
+    internal Item GetItemDescription(string name)
+    {
+        return _items.Where(p => p.Key.Name == name).First().Key; ;
     }
 }

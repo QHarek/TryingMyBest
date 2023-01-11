@@ -1,27 +1,31 @@
-using UnityEngine.UI;
+using UnityEngine;
 
-public class Ore : Item, ISellable
+public sealed class Ore : Item, ISellable
 {
-    private Image _icon;
-
-    public void Delete()
+    public Ore(OreData oreData)
     {
-        Destroy(gameObject);
+        ItemDropPrefab = Resources.Load("Prefabs/OreItem") as GameObject;
+        Icon = oreData.Icon;
+        Cost = oreData.Cost;
+        Weight = oreData.Weight;
+        StackSize = oreData.StackSize;
+        Name = oreData.Name;
+        Description = oreData.Description;
     }
 
-    public void Drop()
+    public override void Delete()
     {
         
     }
 
-    public override Image GetIcon()
+    public override void Drop()
     {
-        return _icon;        
+        
     }
 
-    public void PickUp(IInventory inventory)
+    public override void PickUp(IInventory inventory)
     {
-        inventory.AddItem(gameObject, 1);
+        inventory.AddItem(this, 1);
     }
 
     public void Sell()

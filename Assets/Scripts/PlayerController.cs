@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public sealed class PlayerController : MonoBehaviour
 {
     private PlayerStats _playerStats;
 
-    private void Start()
+    private void Awake()
     {
         _playerStats = FindObjectOfType<PlayerStats>();
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
